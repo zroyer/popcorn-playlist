@@ -1,25 +1,51 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
+import {  QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const API_KEY = '42ffbe2e';
+const queryClient = new QueryClient();
+
+function MovieSearch({ movie }) {
+  const queryInfo = useQuery(
+    ['movie', movie],
+    async () => {
+      const result = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}&type=movie&s=${movie}`, {method: 'GET'});
+      console.log(result);
+      return result.json();
+    },
+    {
+      enabled: !!movie,
+    }
+  )
+
+  return queryInfo.isLoading ? (
+    'Loading...'
+  ) : queryInfo.isError ? (
+    queryInfo.error.message
+  ) : (
+    <div>
+      {queryInfo?.data?.Search?.length > 0 ? (
+        queryInfo.data.Search.map(movie => (<div>{movie.Title}</div>))
+      ) : (
+        'Movie not found.'
+      )}
+      <br />
+      {queryInfo.isFetching ? 'Updating...' : null}
     </div>
-  );
+  )
 }
 
-export default App;
+
+export default function App() {
+  const [movie, setMovie] = useState('');
+  console.log(movie);
+  return(
+    <QueryClientProvider client={queryClient}>
+      <div className="appContainer">
+        <h1>Popcorn Playlist</h1>
+        <input type="text" value={movie} onChange={(e) => setMovie(e.target.value)} placeholder="Search..."/>
+        <MovieSearch movie={movie} />
+      </div>
+    </QueryClientProvider>
+  );
+}
