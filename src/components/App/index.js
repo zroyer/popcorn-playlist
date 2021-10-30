@@ -1,4 +1,5 @@
 import React, { useState, useReducer } from "react";
+import classnames from "classnames";
 import MovieSearch from "../MovieSearch";
 import Playlist from "../Playlist";
 import useDebounce from "../../hooks/useDebounce";
@@ -20,7 +21,11 @@ const App = () => {
   };
 
   return (
-    <div className="app-container">
+    <div
+      className={classnames("app-container", {
+        "confirmation-container": isConfirmation,
+      })}
+    >
       <div className="content-container">
         <header>
           <span className="logo">🍿</span>
@@ -52,10 +57,10 @@ const App = () => {
           <Playlist playlist={playlist} handleRemoveMovie={handleRemoveMovie} />
         )}
       </div>
-      <footer>
+      <footer className={classnames({ "confirmation-footer": isConfirmation })}>
         <span>
           {isConfirmation
-            ? "My favorite color is #000000!"
+            ? "My favorite color is #22272D!"
             : "Made with 🌮 in San Diego, CA"}
         </span>
       </footer>
