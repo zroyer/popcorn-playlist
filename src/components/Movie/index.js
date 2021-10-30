@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import "./styles.css";
 
 const Movie = ({
   movie,
@@ -23,16 +24,19 @@ const Movie = ({
         <img src={movie.Poster} alt={movie.Title} className="movie-poster" />
       ) : null}
       {isConfirmation ? (
-        <button onClick={() => handleRemoveMovie(movie)} className="btn-cta">
+        <button
+          onClick={() => handleRemoveMovie(movie)}
+          className="btn-cta remove"
+        >
           Remove
         </button>
       ) : (
         <button
-          className="btn-cta"
+          className="btn-cta add"
           onClick={() => handleAddMovie(movie)}
           disabled={playlist.includes(movie)}
         >
-          {!playlist.includes(movie) ? "Add" : "Added!"}
+          {!playlist.includes(movie) ? "Add" : "Added"}
         </button>
       )}
     </div>

@@ -15,6 +15,8 @@ const App = () => {
   const handleRemoveMovie = (movie) => {
     const newPlaylist = playlist.filter((m) => m.imdbID !== movie.imdbID);
     setPlaylist(newPlaylist);
+
+    // Return to the search page if there are no more movies in the playlist
     if (newPlaylist.length === 0) {
       setIsConfirmation(false);
     }
@@ -23,12 +25,19 @@ const App = () => {
   return (
     <div
       className={classnames("app-container", {
-        "confirmation-container": isConfirmation,
+        confirmation: isConfirmation,
       })}
     >
       <div className="content-container">
         <header>
-          <span className="logo">🍿</span>
+          <a
+            href="https://github.com/zroyer/popcorn-playlist"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="github-link"
+          >
+            <span className="logo">🍿</span>
+          </a>
           <button
             onClick={setIsConfirmation}
             className="btn-nav"
