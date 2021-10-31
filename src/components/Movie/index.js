@@ -15,10 +15,15 @@ const Movie = ({
     <div className="movie-container">
       <div className="movie-header">
         <div className="movie-header-details">
-          <div className="movie-title">{movie.Title}</div>
-          <button className="btn-nav btn-small" onClick={toggleShowDetails}>
-            {showDetails ? "Hide" : "Details"}
-          </button>
+          <div className="movie-title">
+            {movie.Title}
+            <button
+              className="btn-nav btn-small toggle-details"
+              onClick={toggleShowDetails}
+            >
+              {showDetails ? "Hide" : "Details"}
+            </button>
+          </div>
         </div>
         <div className="movie-year">{movie.Year}</div>
       </div>
