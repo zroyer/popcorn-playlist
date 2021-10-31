@@ -7,7 +7,7 @@ const MovieDetails = ({ movieId, movieTitle, posterUrl }) => {
     ["movies", movieId],
     async () => {
       const result = await fetch(
-        `http://www.omdbapi.com/?apikey=42ffbe2e&plot=full&i=${movieId}`,
+        `https://www.omdbapi.com/?apikey=42ffbe2e&plot=full&i=${movieId}`,
         { method: "GET" }
       );
       return result.json();

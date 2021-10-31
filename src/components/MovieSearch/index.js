@@ -8,7 +8,7 @@ const MovieSearch = ({ movieSearchTerm, playlist, handleAddMovie }) => {
     ["movies", movieSearchTerm],
     async () => {
       const result = await fetch(
-        `http://www.omdbapi.com/?&apikey=42ffbe2e&type=movie&plot=short&s=${movieSearchTerm}`,
+        `https://www.omdbapi.com/?&apikey=42ffbe2e&type=movie&plot=short&s=${movieSearchTerm}`,
         { method: "GET" }
       );
       return result.json();
