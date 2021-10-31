@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import React from "react";
 import Movie from "../Movie";
+import "./styles.css";
 
 const API_KEY = "42ffbe2e";
 
