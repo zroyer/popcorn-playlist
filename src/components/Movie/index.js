@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import MovieDetails from "../MovieDetails";
 import "./styles.css";
 
 const Movie = ({
@@ -8,20 +9,25 @@ const Movie = ({
   handleRemoveMovie,
   isConfirmation,
 }) => {
-  const [showPoster, toggleShowPoster] = useReducer((d) => !d, false);
+  const [showDetails, toggleShowDetails] = useReducer((d) => !d, false);
+
   return (
     <div className="movie-container">
       <div className="movie-header">
         <div className="movie-header-details">
           <div className="movie-title">{movie.Title}</div>
-          <div className="movie-year">{movie.Year}</div>
+          <button className="btn-nav btn-small" onClick={toggleShowDetails}>
+            {showDetails ? "Hide" : "Details"}
+          </button>
         </div>
-        <button className="btn-nav btn-small" onClick={toggleShowPoster}>
-          {`${showPoster ? "Hide" : "Show"}`} Poster
-        </button>
+        <div className="movie-year">{movie.Year}</div>
       </div>
-      {showPoster ? (
-        <img src={movie.Poster} alt={movie.Title} className="movie-poster" />
+      {showDetails ? (
+        <MovieDetails
+          movieId={movie.imdbID}
+          movieTitle={movie.Title}
+          posterUrl={movie.Poster}
+        />
       ) : null}
       {isConfirmation ? (
         <button
