@@ -11,6 +11,7 @@ const App = () => {
   const [playlist, setPlaylist] = useState([]);
   const debouncedSearchTerm = useDebounce(movieSearchTerm, 300);
 
+  const handleFocus = (event) => event.target.select();
   const handleAddMovie = (movie) => setPlaylist([...playlist, movie]);
   const handleRemoveMovie = (movie) => {
     const newPlaylist = playlist.filter((m) => m.imdbID !== movie.imdbID);
@@ -54,6 +55,7 @@ const App = () => {
               type="text"
               value={movieSearchTerm}
               onChange={(e) => setMovieSearchTerm(e.target.value)}
+              onFocus={handleFocus}
               placeholder="Search for a movie..."
             />
             <MovieSearch
